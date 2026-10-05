@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cookies y HttpSession</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 40px; background: #f4f6f8; }
+  h1 { color: #2c3e50; }
+  .fila { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; }
+  .caja { background: #fff; padding: 20px 24px; border-radius: 8px;
+          box-shadow: 0 1px 4px rgba(0,0,0,.15); width: 380px; }
+  h2 { margin-top: 0; color: #2980b9; }
+  label { display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
+  input[type=text], input[type=email], input[type=number], select { padding: 6px; width: 95%; }
+  small { color: #777; }
+  input[type=submit] { padding: 7px 16px; margin-top: 14px; cursor: pointer; }
+  input:invalid:not(:placeholder-shown) { border: 2px solid #e74c3c; }
+  a { display: inline-block; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Manejo de estado en Servlets</h1>
+
+<div class="fila">
+
+  <!-- ===================== COOKIES ===================== -->
+  <div class="caja">
+    <h2>1. Cookies</h2>
+    <p>Los datos se guardan en el <b>navegador</b> como 7 cookies
+       (5 del formulario + visitas + última visita).</p>
+
+    <form action="CookieServlet1" method="post">
+      <label>Nombre</label>
+      <input type="text" name="nombre" required maxlength="30"
+             pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{3,30}" placeholder="Juan Pérez"
+             title="Solo letras y espacios, de 3 a 30 caracteres">
+      <small>Solo letras, 3 a 30 caracteres</small>
+
+      <label>Correo</label>
+      <input type="email" name="email" required maxlength="60" placeholder="juan@correo.com">
+
+      <label>Edad</label>
+      <input type="number" name="edad" required min="1" max="120" step="1" placeholder="20">
+      <small>Entre 1 y 120</small>
+
+      <label>Ciudad</label>
+      <input type="text" name="ciudad" required maxlength="40"
+             pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{2,40}" placeholder="Bogotá"
+             title="Solo letras y espacios, de 2 a 40 caracteres">
+
+      <label>Lenguaje favorito</label>
+      <select name="lenguaje" required>
+        <option value="">-- Seleccione --</option>
+        <option>Java</option>
+        <option>Python</option>
+        <option>JavaScript</option>
+        <option>C#</option>
+      </select>
+
+      <input type="submit" value="Crear cookies">
+    </form>
+    <a href="CookieServlet2">Ver mis cookies</a>
+  </div>
+
+  <!-- ===================== HTTP SESSION ===================== -->
+  <div class="caja">
+    <h2>2. HttpSession</h2>
+    <p>Los datos se guardan en el <b>servidor</b>; el navegador solo recibe
+       el ID de sesión (cookie JSESSIONID).</p>
+
+    <form action="SessionServlet1" method="post">
+      <label>Usuario</label>
+      <input type="text" name="usuario" required maxlength="20"
+             pattern="[A-Za-z0-9_]{3,20}" placeholder="juan_23"
+             title="Letras, números y _ (3 a 20 caracteres, sin espacios)">
+      <small>Letras, números y _ (sin espacios)</small>
+
+      <label>Rol</label>
+      <select name="rol" required>
+        <option value="">-- Seleccione --</option>
+        <option value="usuario">usuario</option>
+        <option value="admin">admin (puede invalidar todas las sesiones)</option>
+      </select>
+
+      <input type="submit" value="Iniciar sesión">
+    </form>
+    <a href="SessionServlet2">Ver mi sesión y las sesiones activas</a>
+  </div>
+
+</div>
+
+</body>
+</html>

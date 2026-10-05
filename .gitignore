@@ -1,0 +1,8 @@
+# Clases compiladas por Eclipse
+build/
+bin/
+*.class
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- pathname="" : Tomcat no guarda las sesiones al reiniciarse,
+     asi el registro de sesiones activas siempre coincide con la realidad -->
+<Context>
+  <Manager pathname="" />
+</Context>

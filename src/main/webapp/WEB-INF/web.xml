@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
+  <display-name>servletCookiesSession</display-name>
+
+  <!-- ============================================================
+       TODO se configura aqui (no se usa @WebServlet ni @WebListener).
+       <listener>        -> clase que Tomcat avisa al crear/destruir sesiones
+       <servlet>         -> nombre logico + clase Java
+       <servlet-mapping> -> nombre logico + URL con la que se llama
+       ============================================================ -->
+
+  <!-- Listener: lleva el registro de TODAS las sesiones activas -->
+  <listener>
+    <listener-class>listeners.SesionListener</listener-class>
+  </listener>
+
+  <!-- ======================= PARTE 1: COOKIES ======================= -->
+
+  <!-- Valida el formulario y crea las 7 cookies -->
+  <servlet>
+    <servlet-name>CookieServlet1</servlet-name>
+    <servlet-class>servlets.CookieServlet1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CookieServlet1</servlet-name>
+    <url-pattern>/CookieServlet1</url-pattern>
+  </servlet-mapping>
+
+  <!-- Lee y valida las cookies, cuenta visitas -->
+  <servlet>
+    <servlet-name>CookieServlet2</servlet-name>
+    <servlet-class>servlets.CookieServlet2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CookieServlet2</servlet-name>
+    <url-pattern>/CookieServlet2</url-pattern>
+  </servlet-mapping>
+
+  <!-- Borra todas las cookies -->
+  <servlet>
+    <servlet-name>CookieLogout</servlet-name>
+    <servlet-class>servlets.CookieLogout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CookieLogout</servlet-name>
+    <url-pattern>/CookieLogout</url-pattern>
+  </servlet-mapping>
+
+  <!-- ===================== PARTE 2: HTTP SESSION ===================== -->
+
+  <!-- Valida usuario/rol y crea la sesion -->
+  <servlet>
+    <servlet-name>SessionServlet1</servlet-name>
+    <servlet-class>servlets.SessionServlet1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SessionServlet1</servlet-name>
+    <url-pattern>/SessionServlet1</url-pattern>
+  </servlet-mapping>
+
+  <!-- Muestra mi sesion y la lista de sesiones activas -->
+  <servlet>
+    <servlet-name>SessionServlet2</servlet-name>
+    <servlet-class>servlets.SessionServlet2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SessionServlet2</servlet-name>
+    <url-pattern>/SessionServlet2</url-pattern>
+  </servlet-mapping>
+
+  <!-- Invalida solo MI sesion -->
+  <servlet>
+    <servlet-name>SessionLogout</servlet-name>
+    <servlet-class>servlets.SessionLogout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SessionLogout</servlet-name>
+    <url-pattern>/SessionLogout</url-pattern>
+  </servlet-mapping>
+
+  <!-- Invalida TODAS las sesiones activas (solo rol admin) -->
+  <servlet>
+    <servlet-name>InvalidarSesiones</servlet-name>
+    <servlet-class>servlets.InvalidarSesiones</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InvalidarSesiones</servlet-name>
+    <url-pattern>/InvalidarSesiones</url-pattern>
+  </servlet-mapping>
+
+  <!-- Tiempo de vida de la sesion: 30 minutos sin actividad -->
+  <session-config>
+    <session-timeout>30</session-timeout>
+    <cookie-config>
+      <http-only>true</http-only>
+    </cookie-config>
+  </session-config>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>
